@@ -23,7 +23,7 @@ docker buildx build \
 
 docker buildx build \
 --progress plain \
--t $ECR_URI/$RAILS_IMAGE
+-t $ECR_URI/$RAILS_IMAGE \
 --platform=local \
 --provenance=false \
 --push \
