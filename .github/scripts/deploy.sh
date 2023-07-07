@@ -15,7 +15,7 @@ aws ecr get-login-password --region $REGION | docker login --username AWS --pass
 
 docker buildx build \
 --progress plain \
--t $ECR_URI/$MYSQL_IMAGE
+-t $ECR_URI/$MYSQL_IMAGE \
 --platform=local \
 --provenance=false \
 --push \
