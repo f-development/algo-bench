@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mysql:
+    build: mysql
+    platform: linux/x86_64
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    # ports:
+    #   - $DB_PORT:3306
+    restart: always
+
+  rails:
+    build: rails
+    command: ./entrypoint.sh
+    environment:
+      - DB_HOST
+      - DB_USER
+      - DB_PORT
+      - DB_PASSWD
+      - BENCH_PORT
+      - RAILS_ENV
+      - SECRET_KEY_BASE
+      - RAILS_SERVE_STATIC_FILES
+    restart: always
+    ports:
+      - $BENCH_PORT:$BENCH_PORT
+
+    # network_mode: host

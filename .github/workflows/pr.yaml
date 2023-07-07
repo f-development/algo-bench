@@ -1,0 +1,32 @@
+name: deploy
+
+on:
+  - pull_request
+
+permissions:
+  id-token: write
+  actions: write
+  contents: read
+  pull-requests: read
+
+jobs:
+  check_large_file:
+    runs-on: ubuntu-latest
+    name: check_large_file
+    steps:
+      - uses: actions/checkout@v3
+      - uses: f-lib/github-actions/check-large-file@main
+        with:
+          threshold: 2000
+
+  ecs:
+    runs-on: ubuntu-latest
+    name: ecs
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::721756646069:role/f-development-algo-bench-github-actions-deploy
+          aws-region: us-west-2
+      - uses: docker/setup-buildx-action@v2
+      - run: ./.github/scripts/deploy.sh
