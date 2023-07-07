@@ -12,7 +12,6 @@ services:
 
   rails:
     build: rails
-    command: ./entrypoint.sh
     environment:
       - DB_HOST
       - DB_USER

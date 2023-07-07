@@ -15,3 +15,5 @@ RUN bundle install
 COPY . .
 
 RUN chmod u+x ./start_docker.sh
+
+CMD ./entrypoint.sh
